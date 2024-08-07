@@ -22,9 +22,9 @@ public class DirectorateController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @DeleteMapping(value = "/admin/directorate")
-    public ResponseEntity deleteDirectorate(@RequestBody Directorate directorate){
-        directorateService.deleteDirectorate(directorate);
+    @DeleteMapping(value = "/admin/directorate/{name}")
+    public ResponseEntity deleteDirectorate(@PathVariable String name){
+        directorateService.deleteDirectorate(name);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -17,7 +17,8 @@ public class DirectorateService {
         directorateRepository.save(directorate);
     }
 
-    public void deleteDirectorate(Directorate directorate){
+    public void deleteDirectorate(String name){
+        Directorate directorate =directorateRepository.findByName(name);
         directorateRepository.delete(directorate);
     }
 

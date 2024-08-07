@@ -26,7 +26,7 @@ public class TechFileController {
     @DeleteMapping(value = "/admin/file/{code}")
     public ResponseEntity deleteFile(@PathVariable String code) {
         TechFile file = techFileService.findFromCode(code);
-        String name = file.getName() + ".pdf";
+        String name = file.getCode() + ".pdf";
         String rootPath = new FileSystemResource("").getFile().getAbsolutePath();
         try {
             Files.deleteIfExists(Paths.get(rootPath + "\\public\\" + name));
