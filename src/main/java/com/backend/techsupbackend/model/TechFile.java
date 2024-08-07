@@ -12,7 +12,7 @@ public class TechFile {
     private String type;
     @ElementCollection
     private List<String> users;
-    
+
     @ManyToMany
     @JoinTable(
             name = "techFile_directorate",
@@ -22,10 +22,11 @@ public class TechFile {
 
     protected TechFile(){}
 
-    public TechFile(String code, String name, String type, List<Directorate> directorateList) {
+    public TechFile(String code, String name, String type, List<String> users, List<Directorate> directorateList) {
         this.code = code;
         this.name = name;
         this.type = type;
+        this.users = users;
         this.directorateList = directorateList;
     }
 
