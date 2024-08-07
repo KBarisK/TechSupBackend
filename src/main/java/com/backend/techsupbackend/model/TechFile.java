@@ -1,7 +1,8 @@
 package com.backend.techsupbackend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class TechFile {
@@ -9,15 +10,20 @@ public class TechFile {
     private String code;
     private String name;
     private String type;
-    private int userType;
+    @ManyToMany
+    @JoinTable(
+            name = "techFile_directorate",
+            joinColumns = @JoinColumn(name = "techFile_code"),
+            inverseJoinColumns = @JoinColumn(name = "directorate_id")
+    ) private List<Directorate> directorateList;
 
     protected TechFile(){}
 
-    public TechFile(String code, String name, String type,int userType) {
+    public TechFile(String code, String name, String type, List<Directorate> directorateList) {
         this.code = code;
         this.name = name;
         this.type = type;
-        this.userType = userType;
+        this.directorateList = directorateList;
     }
 
     public String getCode() {

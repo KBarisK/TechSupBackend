@@ -18,6 +18,13 @@ public class TechFileService {
     }
 
     public void addFile(TechFile file){
+        String type = file.getType();
+        int amount = findFromType(type).size();
+        if (type.equals("Süreç")){
+            file.setCode("SB" + amount);
+        }else {
+            file.setCode("BB" + amount);
+        }
         techFileRepository.save(file);
     }
 
@@ -25,8 +32,15 @@ public class TechFileService {
         techFileRepository.delete(file);
     }
 
-    public List<TechFile> findFilesForUserType(int userType){
-        return techFileRepository.findByUserType(userType);
+    public List<TechFile> directorateFiles(String name){
+        return techFileRepository.findAllBydirectorateList_Name(name);
+    }
+    public List<TechFile> directorateFiles(Integer id){
+        return techFileRepository.findAllBydirectorateList_Id(id);
+    }
+
+    public List<TechFile> findFromType(String type){
+     return techFileRepository.findAllByType(type);
     }
 
     public TechFile findFromCode(String code){

@@ -12,8 +12,8 @@ import java.util.List;
 @Entity
 public class Admin implements UserDetails {
     @Id
-    String username;
-    String password;
+    private String username;
+    private String password;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
