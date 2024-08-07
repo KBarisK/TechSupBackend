@@ -10,6 +10,9 @@ public class TechFile {
     private String code;
     private String name;
     private String type;
+    @ElementCollection
+    private List<String> users;
+    
     @ManyToMany
     @JoinTable(
             name = "techFile_directorate",
