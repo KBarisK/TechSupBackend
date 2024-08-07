@@ -29,4 +29,8 @@ public class DirectorateService {
     public Directorate getDirectorate(int id){
         return directorateRepository.findById(id).orElseThrow();
     }
+
+    public Directorate getDirectorate(String name){
+        return directorateRepository.findByName(name);
+    }
 }

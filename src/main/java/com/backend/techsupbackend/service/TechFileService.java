@@ -1,6 +1,8 @@
 package com.backend.techsupbackend.service;
 
+import com.backend.techsupbackend.model.Directorate;
 import com.backend.techsupbackend.model.TechFile;
+import com.backend.techsupbackend.repository.DirectorateRepository;
 import com.backend.techsupbackend.repository.TechFileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,8 @@ public class TechFileService {
 
     @Autowired
     private TechFileRepository techFileRepository;
+    @Autowired
+    private DirectorateRepository directorateService;
 
     public List<TechFile> allFiles(){
         return techFileRepository.findAll();
@@ -25,6 +29,11 @@ public class TechFileService {
         }else {
             file.setCode("BB" + amount);
         }
+        List<String> directorateList = file.getDirectorateList();
+        for (int i = 0; i < directorateList.size(); i++) {
+            Directorate directorate = directorateService.findByName(directorateList.get(i));
+            directorate.getFileList().add(file.getName());
+        }
         techFileRepository.save(file);
     }
 
@@ -34,13 +43,6 @@ public class TechFileService {
 
     public void deleteFile(TechFile file){
         techFileRepository.delete(file);
-    }
-
-    public List<TechFile> directorateFiles(String name){
-        return techFileRepository.findAllBydirectorateList_Name(name);
-    }
-    public List<TechFile> directorateFiles(Integer id){
-        return techFileRepository.findAllBydirectorateList_Id(id);
     }
 
     public List<TechFile> findFromType(String type){

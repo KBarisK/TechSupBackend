@@ -15,7 +15,6 @@ public class DirectorateController {
     @Autowired
     DirectorateService directorateService;
 
-
     @PostMapping(value = "/admin/directorate")
     public ResponseEntity addDirectorate(@RequestBody Directorate directorate){
         directorateService.addDirectorate(directorate);

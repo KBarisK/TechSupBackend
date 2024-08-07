@@ -14,6 +14,18 @@ public class TechFile {
     private String type;
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> users;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> directorateList;
+
+    protected TechFile(){}
+
+    public TechFile(String code, String name, String type, List<String> users, List<String> directorateList) {
+        this.code = code;
+        this.name = name;
+        this.type = type;
+        this.users = users;
+        this.directorateList = directorateList;
+    }
 
     public List<String> getUsers() {
         return users;
@@ -23,26 +35,14 @@ public class TechFile {
         this.users = users;
     }
 
-    public List<Directorate> getDirectorateList() {
+    public List<String> getDirectorateList() {
         return directorateList;
     }
 
-    public void setDirectorateList(List<Directorate> directorateList) {
+    public void setDirectorateList(List<String> directorateList) {
         this.directorateList = directorateList;
     }
 
-    @ManyToMany
-    private List<Directorate> directorateList;
-
-    protected TechFile(){}
-
-    public TechFile(String code, String name, String type, List<String> users, List<Directorate> directorateList) {
-        this.code = code;
-        this.name = name;
-        this.type = type;
-        this.users = users;
-        this.directorateList = directorateList;
-    }
 
     public String getCode() {
         return code;

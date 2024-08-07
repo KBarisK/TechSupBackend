@@ -9,9 +9,6 @@ import java.util.List;
 @Repository
 public interface TechFileRepository extends JpaRepository<TechFile,String> {
     public TechFile findByName(String name);
-    public List<TechFile> findAllBydirectorateList_Name(String name);
-
-    public List<TechFile> findAllBydirectorateList_Id(int id);
 
     public List<TechFile> findAllByType(String type);
 

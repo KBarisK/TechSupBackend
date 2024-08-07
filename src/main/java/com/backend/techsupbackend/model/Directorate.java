@@ -10,10 +10,10 @@ public class Directorate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    @ManyToMany(mappedBy = "directorateList")
-    private List<TechFile> fileList;
+    @ElementCollection
+    private List<String> fileList;
 
-    public Directorate(int id, String name, List<TechFile> fileList) {
+    public Directorate(int id, String name, List<String> fileList) {
         this.id = id;
         this.name = name;
         this.fileList = fileList;
@@ -42,11 +42,11 @@ public class Directorate {
         this.name = name;
     }
 
-    public List<TechFile> getFileList() {
+    public List<String> getFileList() {
         return fileList;
     }
 
-    public void setFileList(List<TechFile> fileList) {
+    public void setFileList(List<String> fileList) {
         this.fileList = fileList;
     }
 }
