@@ -18,6 +18,11 @@ public class Directorate {
         this.name = name;
         this.fileList = fileList;
     }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Directorate() {
     }
 

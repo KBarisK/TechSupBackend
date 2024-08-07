@@ -1,6 +1,8 @@
 package com.backend.techsupbackend.model;
 
+import com.backend.techsupbackend.service.TechFileService;
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -10,15 +12,27 @@ public class TechFile {
     private String code;
     private String name;
     private String type;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> users;
 
+    public List<String> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<String> users) {
+        this.users = users;
+    }
+
+    public List<Directorate> getDirectorateList() {
+        return directorateList;
+    }
+
+    public void setDirectorateList(List<Directorate> directorateList) {
+        this.directorateList = directorateList;
+    }
+
     @ManyToMany
-    @JoinTable(
-            name = "techFile_directorate",
-            joinColumns = @JoinColumn(name = "techFile_code"),
-            inverseJoinColumns = @JoinColumn(name = "directorate_id")
-    ) private List<Directorate> directorateList;
+    private List<Directorate> directorateList;
 
     protected TechFile(){}
 
