@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+@RequestMapping("/tg/api")
 @RestController
 public class TechFileController {
     @Autowired
