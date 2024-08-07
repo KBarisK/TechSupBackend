@@ -28,6 +28,10 @@ public class TechFileService {
         techFileRepository.save(file);
     }
 
+    public TechFile findByName(String name){
+        return techFileRepository.findByName(name);
+    }
+
     public void deleteFile(TechFile file){
         techFileRepository.delete(file);
     }

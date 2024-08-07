@@ -40,7 +40,8 @@ public class TechFileController {
     @PostMapping(value = "/admin/file")
     public ResponseEntity createNewFile(@RequestBody TechFile techFile) {
         techFileService.addFile(techFile);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        String code = techFileService.findByName(techFile.getName()).getCode();
+        return ResponseEntity.ok(code);
     }
 
     @GetMapping(value = "/files")
