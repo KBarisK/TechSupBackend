@@ -24,12 +24,18 @@ public class TechFileService {
     public void addFile(TechFile file){
         String type = file.getType();
         int amount;
-        TechFile techFile =  findFromType(type).getLast();
+        TechFile techFile;
+        int index = findFromType(type).size()-1;
+        if (index == -1){
+            techFile = null;
+        }else {
+            techFile =  findFromType(type).get(index);
+        }
         if (techFile == null) {
             amount = 0;
         }
         else {
-            amount = Integer.parseInt(findFromType(type).getLast().getCode().substring(3)) + 1;
+            amount = Integer.parseInt(findFromType(type).get(index).getCode().substring(2)) + 1;
         }
         if (type.equals("Süreç")){
             file.setCode("SB" + amount);
