@@ -23,7 +23,14 @@ public class TechFileService {
 
     public void addFile(TechFile file){
         String type = file.getType();
-        int amount = findFromType(type).size();
+        int amount;
+        TechFile techFile =  findFromType(type).getLast();
+        if (techFile == null) {
+            amount = 0;
+        }
+        else {
+            amount = Integer.parseInt(findFromType(type).getLast().getCode().substring(3)) + 1;
+        }
         if (type.equals("Süreç")){
             file.setCode("SB" + amount);
         }else {

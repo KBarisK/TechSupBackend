@@ -14,16 +14,28 @@ public class TechFile {
     private String type;
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> users;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> departments;
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> directorateList;
 
     protected TechFile(){}
 
-    public TechFile(String code, String name, String type, List<String> users, List<String> directorateList) {
+    public List<String> getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(List<String> departments) {
+        this.departments = departments;
+    }
+
+    public TechFile(String code, String name, String type, List<String> users, List<String> departments, List<String> directorateList) {
         this.code = code;
         this.name = name;
         this.type = type;
         this.users = users;
+        this.departments = departments;
         this.directorateList = directorateList;
     }
 
