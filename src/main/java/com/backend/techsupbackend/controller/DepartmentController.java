@@ -1,7 +1,6 @@
 package com.backend.techsupbackend.controller;
 
 import com.backend.techsupbackend.model.Department;
-import com.backend.techsupbackend.model.Directorate;
 import com.backend.techsupbackend.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
