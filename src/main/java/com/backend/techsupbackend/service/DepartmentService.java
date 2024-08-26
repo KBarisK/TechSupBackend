@@ -47,6 +47,25 @@ public class DepartmentService {
         }
     }
 
+    public void deleteDepartment(Integer id){
+        Department department = departmentRepository.findById(id).orElseThrow();
+        String name = department.getName();
+        departmentRepository.deleteById(id);
+        List<TechFile> fileList = techFileRepository.findAll();
+        for (int i = 0; i < fileList.size(); i++) {
+            TechFile file = fileList.get(i);
+            List<String> departmentList = file.getDepartments();
+            for (int j = 0; j < departmentList.size() ; j++) {
+                String department_name = departmentList.get(i);
+                if (department_name.equals(name)){
+                    departmentList.remove(i);
+                }
+            }
+            file.setDirectorateList(departmentList);
+            techFileRepository.save(file);
+        }
+    }
+
     public List<Department> getAll() {
         return departmentRepository.findAll();
     }

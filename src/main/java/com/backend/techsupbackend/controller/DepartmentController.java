@@ -22,9 +22,9 @@ public class DepartmentController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @DeleteMapping(value = "/admin/department/{name}")
-    public ResponseEntity deleteDepartment(@PathVariable String name){
-        departmentService.deleteDepartment(name);
+    @DeleteMapping(value = "/admin/department/{id}")
+    public ResponseEntity deleteDepartment(@PathVariable Integer id){
+        departmentService.deleteDepartment(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

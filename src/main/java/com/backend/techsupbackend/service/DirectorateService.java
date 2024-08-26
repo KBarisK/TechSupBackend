@@ -1,5 +1,6 @@
 package com.backend.techsupbackend.service;
 
+import com.backend.techsupbackend.model.Department;
 import com.backend.techsupbackend.model.Directorate;
 import com.backend.techsupbackend.model.TechFile;
 import com.backend.techsupbackend.repository.DirectorateRepository;
@@ -32,6 +33,26 @@ public class DirectorateService {
         name = stringBuilder.toString();
         Directorate directorate =directorateRepository.findByName(name);
         directorateRepository.delete(directorate);
+        List<TechFile> fileList = techFileRepository.findAll();
+        for (int i = 0; i < fileList.size(); i++) {
+            TechFile file = fileList.get(i);
+            List<String> directorateList = file.getDirectorateList();
+            System.out.println(directorateList);
+            for (int j = 0; j < directorateList.size() ; j++) {
+                String directorate_name = directorateList.get(i);
+                if (directorate_name.equals(name)){
+                    directorateList.remove(i);
+                }
+            }
+            file.setDirectorateList(directorateList);
+            techFileRepository.save(file);
+        }
+    }
+
+    public void deleteDirectorate(Integer id){
+        Directorate directorate = directorateRepository.findById(id).orElseThrow();
+        String name = directorate.getName();
+        directorateRepository.deleteById(id);
         List<TechFile> fileList = techFileRepository.findAll();
         for (int i = 0; i < fileList.size(); i++) {
             TechFile file = fileList.get(i);

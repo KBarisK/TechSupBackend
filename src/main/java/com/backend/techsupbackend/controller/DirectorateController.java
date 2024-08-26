@@ -21,9 +21,9 @@ public class DirectorateController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @DeleteMapping(value = "/admin/directorate/{name}")
-    public ResponseEntity deleteDirectorate(@PathVariable String name){
-        directorateService.deleteDirectorate(name);
+    @DeleteMapping(value = "/admin/directorate/{id}")
+    public ResponseEntity deleteDirectorate(@PathVariable Integer id){
+        directorateService.deleteDirectorate(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
