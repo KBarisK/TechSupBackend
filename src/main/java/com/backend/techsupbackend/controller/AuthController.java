@@ -20,7 +20,7 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping("/register")
+    @PostMapping("/admin/register")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody Admin admin){
         return ResponseEntity.ok(authService.register(admin));
     }
