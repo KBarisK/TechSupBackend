@@ -100,6 +100,6 @@ public class TechFileController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return ".pdf";
+        return "pdf";
     }
 }
