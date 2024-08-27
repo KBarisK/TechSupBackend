@@ -83,6 +83,23 @@ public class TechFileController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    @GetMapping(value = "files/extansion/{code}")
+    public String getFileExtansion(@PathVariable String code){
+        String rootPath = new FileSystemResource("").getFile().getAbsolutePath();
+        try {
+            DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(rootPath + "\\public"));
+            for (Path tempPath : stream) {
+                String fileName = tempPath.getFileName().toString();
+                String[] temp = fileName.split("\\.");
+                if (temp[0].equals(code)){
+                    return temp[1];
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return ".pdf";
     }
 }
