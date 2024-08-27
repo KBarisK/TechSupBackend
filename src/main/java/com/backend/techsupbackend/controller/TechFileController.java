@@ -39,7 +39,7 @@ public class TechFileController {
             DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(rootPath + "\\public"));
             for (Path tempPath : stream) {
                 String fileName = tempPath.getFileName().toString();
-                String[] temp = fileName.split("."); //it is okay to do because we change file names like BB1 BB0 so there is no other .
+                String[] temp = fileName.split("\\."); //it is okay to do because we change file names like BB1 BB0 so there is no other .
                 if (temp[0].equals(code)){
                     String name = file.getCode() + "." + temp[1];
                     try {
