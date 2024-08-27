@@ -85,8 +85,8 @@ public class TechFileController {
         }
     }
 
-    @GetMapping(value = "files/extansion/{code}")
-    public String getFileExtansion(@PathVariable String code){
+    @GetMapping(value = "files/extension/{code}")
+    public String getFileExtension(@PathVariable String code){
         String rootPath = new FileSystemResource("").getFile().getAbsolutePath();
         try {
             DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(rootPath + "\\public"));
