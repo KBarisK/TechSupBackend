@@ -31,12 +31,18 @@ public class TechFileController {
     @DeleteMapping(value = "/admin/file/{code}")
     public ResponseEntity deleteFile(@PathVariable String code) {
         TechFile file = techFileService.findFromCode(code);
-        String name = file.getCode() + ".pdf";
         String rootPath = new FileSystemResource("").getFile().getAbsolutePath();
-        try {
-            Files.deleteIfExists(Paths.get(rootPath + "\\public\\" + name));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        String[] path = new FileSystemResource("\\public").getFile().list();
+        for (int i = 0; i < path.length; i++) {
+            String[] temp = path[i].split("."); //it is okay to do because we change file names like BB1 BB0 so there is no other .
+            if (temp[0].equals(code)){
+                String name = file.getCode() + "." + temp[1];
+                try {
+                    Files.deleteIfExists(Paths.get(rootPath + "\\public\\" + name));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
         techFileService.deleteFile(file);
         return new ResponseEntity<>(HttpStatus.OK);
