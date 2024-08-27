@@ -4,6 +4,7 @@ import com.backend.techsupbackend.model.Directorate;
 import com.backend.techsupbackend.model.TechFile;
 import com.backend.techsupbackend.service.DirectorateService;
 import com.backend.techsupbackend.service.TechFileService;
+import com.fasterxml.jackson.databind.ser.std.FileSerializer;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
@@ -17,7 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -32,17 +35,22 @@ public class TechFileController {
     public ResponseEntity deleteFile(@PathVariable String code) {
         TechFile file = techFileService.findFromCode(code);
         String rootPath = new FileSystemResource("").getFile().getAbsolutePath();
-        String[] path = new FileSystemResource("\\public").getFile().list();
-        for (int i = 0; i < path.length; i++) {
-            String[] temp = path[i].split("."); //it is okay to do because we change file names like BB1 BB0 so there is no other .
-            if (temp[0].equals(code)){
-                String name = file.getCode() + "." + temp[1];
-                try {
-                    Files.deleteIfExists(Paths.get(rootPath + "\\public\\" + name));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+        try {
+            DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(rootPath + "\\public"));
+            for (Path tempPath : stream) {
+                String fileName = tempPath.getFileName().toString();
+                String[] temp = fileName.split("."); //it is okay to do because we change file names like BB1 BB0 so there is no other .
+                if (temp[0].equals(code)){
+                    String name = file.getCode() + "." + temp[1];
+                    try {
+                        Files.deleteIfExists(Paths.get(rootPath + "\\public\\" + name));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         techFileService.deleteFile(file);
         return new ResponseEntity<>(HttpStatus.OK);
